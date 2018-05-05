@@ -1,0 +1,46 @@
+{include file="index/header" /}
+	<!--正文 start-->
+	<div class="container" style="padding-top:60px;">
+		<form action="/Seller/category/index/edit" method="POST" accept-charset="utf-8">
+		{load href='/Seller/public/static/category.js'/}
+		<div class="form-group">
+			<label class="sr-only" for="id">父级</label>
+			<div class="input-group">
+				<div class="input-group-addon">父级</div>
+				<span id="category">
+					<select onChange="getPid(this)" class="form-control" id="id" style="border-radius:0;"></select>
+					<select onChange="getPid(this)" class="form-control" style="margin-top:5px;"></select>
+					<select onChange="getPid(this)" class="form-control" style="margin-top:5px;"></select>
+					<select onChange="getPid(this)" class="form-control" style="margin-top:5px;"></select>
+				</span>
+				<div class="input-group-addon"><i class="glyphicon glyphicon-list"></i></div>
+			</div>
+		</div>
+		<input type="hidden" id='id' name="id" value="{$data.id}">
+		<input type="hidden" id='pid' name="pid" value="{$data.pid}">
+		<div class="form-group">
+			<label class="sr-only" for="name">名称</label>
+			<div class="input-group">
+				<div class="input-group-addon">名称</div>
+				<input type="text" name="name" class="form-control" id="name" value="{$data.name}" >
+				<div class="input-group-addon"><i class=" icon-comment"></i></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="sr-only" for="order">排序</label>
+			<div class="input-group">
+				<div class="input-group-addon">排序</div>
+				<input type="text" name="order" class="form-control" id="order" placeholder="请输入分类排序" value="{$data.order}" >
+				<div class="input-group-addon"><i class=" icon-comment"></i></div>
+			</div>
+		</div>
+
+		<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			<div class="btn-group" role="group">
+				<button type="submit" class="btn btn-primary">确定修改</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!--正文 end-->
+{include file="index/footer" /}

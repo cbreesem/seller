@@ -1,0 +1,174 @@
+{include file="index/header" /}
+	<!--正文 start-->
+	<div class="container" style="padding-top:20px;">
+		<form class="form-inline" id="selectList" method='get'  action='/Seller/index/index/menu'>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">进入资料列表</span>
+				<span class="input-group-addon" id="basic-addon1">省份</span>
+				<select class="form-control" id="province" name="province">
+					<option>请选择</option>
+				</select>
+				<span class="input-group-addon" id="basic-addon1">地区</span>
+				<select class="form-control" id="district" name="district">
+					<option>请选择</option>
+				</select>
+				<span class="input-group-addon" id="basic-addon1">城市</span>
+				<select class="form-control" id="city" name="city">
+					<option>请选择</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-default">确定</button>
+		</form>
+		<form class="form-inline" id="selectList1" method='get'  action='/Seller/index/index/imgList'  style="padding-top:20px;">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">未配对的照片</span>
+				<span class="input-group-addon" id="basic-addon1">省份</span>
+				<select class="form-control" id="province" name="province">
+					<option>请选择</option>
+				</select>
+				<span class="input-group-addon" id="basic-addon1">地区</span>
+				<select class="form-control" id="district" name="district">
+					<option>请选择</option>
+				</select>
+				<span class="input-group-addon" id="basic-addon1">城市</span>
+				<select class="form-control" id="city" name="city">
+					<option>请选择</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-default">确定</button>
+		</form>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#selectList").each(function(){
+			var area = [{"p":"湖南省","c":[
+						{volist name="area" id="vo" key="key"}
+							{"ct":"{$key}","d":[
+								{volist name="vo" id="f"}
+									{"dt":"{$f}"},
+								{/volist}
+							]},
+						{/volist}]
+						},];
+			var temp_html;
+			var oProvince = $(this).find("#province");
+			var oDistrict = $(this).find("#district");
+			var oCity = $(this).find("#city");
+			//初始化省
+			var province = function(){
+				$.each(area,function(i,province){
+					temp_html+="<option value='"+province.p+"'>"+province.p+"</option>";
+				});
+				oProvince.html(temp_html);
+				district();
+			};
+			//赋值地区
+			var district = function(){
+				temp_html = ""; 
+				var n = oProvince.get(0).selectedIndex;
+				$.each(area[n].c,function(i,district){
+					temp_html+="<option value='"+district.ct+"'>"+district.ct+"</option>";
+				});
+				oDistrict.html(temp_html);
+				city();
+			};
+			//赋值区县
+			var city = function(){
+				temp_html = ""; 
+				var m = oProvince.get(0).selectedIndex;
+				var n = oDistrict.get(0).selectedIndex;
+				if(typeof(area[m].c[n].d) == "undefined"){
+					oCity.css("display","none");
+				}else{
+					oCity.css("display","inline");
+					$.each(area[m].c[n].d,function(i,district){
+						temp_html+="<option value='"+district.dt+"'>"+district.dt+"</option>";
+					});
+					oCity.html(temp_html);
+				};
+			};
+			//选择省改变市
+			oProvince.change(function(){
+				district();
+			});
+			//选择市改变县
+			oDistrict.change(function(){
+				city();
+			});
+			province();
+			//获取json数据
+			// $.getJSON(url,function(data){
+			//     area = data;
+			//     province();
+			// });
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		$("#selectList1").each(function(){
+			var area = [{"p":"湖南省","c":[
+						{volist name="area" id="vo" key="key"}
+							{"ct":"{$key}","d":[
+								{volist name="vo" id="f"}
+									{"dt":"{$f}"},
+								{/volist}
+							]},
+						{/volist}]
+						},];
+			var temp_html;
+			var oProvince = $(this).find("#province");
+			var oDistrict = $(this).find("#district");
+			var oCity = $(this).find("#city");
+			//初始化省
+			var province = function(){
+				$.each(area,function(i,province){
+					temp_html+="<option value='"+province.p+"'>"+province.p+"</option>";
+				});
+				oProvince.html(temp_html);
+				district();
+			};
+			//赋值地区
+			var district = function(){
+				temp_html = ""; 
+				var n = oProvince.get(0).selectedIndex;
+				$.each(area[n].c,function(i,district){
+					temp_html+="<option value='"+district.ct+"'>"+district.ct+"</option>";
+				});
+				oDistrict.html(temp_html);
+				city();
+			};
+			//赋值区县
+			var city = function(){
+				temp_html = ""; 
+				var m = oProvince.get(0).selectedIndex;
+				var n = oDistrict.get(0).selectedIndex;
+				if(typeof(area[m].c[n].d) == "undefined"){
+					oCity.css("display","none");
+				}else{
+					oCity.css("display","inline");
+					$.each(area[m].c[n].d,function(i,district){
+						temp_html+="<option value='"+district.dt+"'>"+district.dt+"</option>";
+					});
+					oCity.html(temp_html);
+				};
+			};
+			//选择省改变市
+			oProvince.change(function(){
+				district();
+			});
+			//选择市改变县
+			oDistrict.change(function(){
+				city();
+			});
+			province();
+			//获取json数据
+			// $.getJSON(url,function(data){
+			//     area = data;
+			//     province();
+			// });
+		});
+	});
+	</script>
+	<!--正文 end-->
+{include file="index/footer" /}

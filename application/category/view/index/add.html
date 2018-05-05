@@ -1,0 +1,32 @@
+{include file="index/header" /}
+	<!--正文 start-->
+	<div class="container" style="padding-top:60px;">
+		<form action="/Seller/category/index/add" method="POST" accept-charset="utf-8">
+
+		<input type="hidden" name="pid" value="{$data.id}">
+		<div class="form-group">
+			<label class="sr-only" for="name">名称</label>
+			<div class="input-group">
+				<div class="input-group-addon">名称</div>
+				<input type="text" name="name" class="form-control" id="name">
+				<div class="input-group-addon"><i class=" icon-comment"></i></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="sr-only" for="order">排序</label>
+			<div class="input-group">
+				<div class="input-group-addon">排序</div>
+				<input type="text" name="order" class="form-control" id="order" placeholder="请输入分类排序">
+				<div class="input-group-addon"><i class=" icon-comment"></i></div>
+			</div>
+		</div>
+
+		<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			<div class="btn-group" role="group">
+				<button type="submit" class="btn btn-primary">确定添加</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!--正文 end-->
+{include file="index/footer" /}

@@ -1,0 +1,275 @@
+{include file="index/header" /}
+<style>
+<!--
+#allmap label{max-width:none;}
+-->
+</style>
+<script type="text/javascript"> 
+<!--
+$(function() {
+    $("ul.dropdown-menu").on("click", "[data-stopPropagation]", function(e) {
+        e.stopPropagation();
+    });
+});
+--> 
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=krsQrng0eKaoLxzvthmSxMpNUiDqLePe"></script>
+	<!--正文 start-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-8 col-sm-12">
+				<div class="row">
+					<img  class="col-lg-12 col-sm-12" src="/CompanyFiles/商家信息/{$info.imgpath}"/>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-12">
+				<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin: 15px 0">
+					<div class="btn-group">
+						<a href="{:url('index/menu',['province'=>$info.province])}" class="btn btn-default" role="button">{$info.province} <span class="badge">省份</span></a>
+					</div>
+					<div class="btn-group" role="group">
+						<a href="{:url('index/menu',['district'=>$info.district])}" class="btn btn-default" role="button">{$info.district} <span class="badge">地区</span></a>
+					</div>
+					<div class="btn-group" role="group">
+						<a href="{:url('index/menu',['city'=>$info.city])}" class="btn btn-default" role="button">{$info.city} <span class="badge">城市</span></a>
+					</div>
+					<div class="btn-group" role="group">
+						<a href="{:url('index/menu',['towns'=>$info.towns])}" class="btn btn-default" role="button">{$info.towns} <span class="badge">乡镇</span></a>
+					</div>
+					<div class="btn-group" role="group">
+						<a href="{:url('index/menu',['road'=>$info.road])}" class="btn btn-default" role="button">{$info.road} <span class="badge">道路</span></a>
+					</div>
+					
+				</div>
+				<form class="bs-example bs-example-form" data-example-id="input-group-sizing" action="/Seller/index/index/edit" method='post'>
+					<input type="hidden" name="id" value="{$info.id}">
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">名称</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.name}" name="name">
+					  <span class="input-group-addon" id="sizing-addon3">经理</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.linkman}" name="linkman">
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">地址</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.address}" name="address">
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">座机</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.telephone}" name="telephone">
+					  <span class="input-group-addon" id="sizing-addon3">添加</span>
+					  <input type="text" class="form-control" placeholder="输入其他号码，多个以逗号隔开" aria-describedby="basic-addon1" name="add_telephone">
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">手机</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.mobile}" name="mobile">
+					  <span class="input-group-addon" id="sizing-addon3">添加</span>
+					  <input type="text" class="form-control" placeholder="输入其他号码，多个以逗号隔开" aria-describedby="basic-addon1" name="add_mobile">
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">热词</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.keyword}" name="keyword">
+					  <span class="input-group-addon" id="sizing-addon3">添加</span>
+					  <input type="text" class="form-control" placeholder="请完善商家关键词" aria-describedby="basic-addon1" name="add_keyword">
+					</div>
+					</div>
+					
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">门头</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.imgpath}" name="imgpath">
+					</div>
+					</div>
+					
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">介绍</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.profile}" name="profile">
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">类型</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.mode}" disabled>
+					  <div class="input-group-btn input-group-btn-xs" data-toggle="buttons" style="width:10%">
+					  <label class="btn btn-default {if condition="$info.mode eq '生产型' "}active{/if}">
+						<input type="radio" name="mode" id="option1" autocomplete="off" value="生产型" {if condition="$info.mode eq '生产型' "}checked{/if}> 生产型
+					  </label>
+					  <label class="btn btn-default {if condition="$info.mode eq '贸易型' "}active{/if}">
+						<input type="radio" name="mode" id="option2" autocomplete="off" value="贸易型" {if condition="$info.mode eq '生产型' "}checked{/if}> 贸易型
+					  </label>
+					  <label class="btn btn-default {if condition="$info.mode eq '服务型' "}active{/if}">
+						<input type="radio" name="mode" id="option3" autocomplete="off" value="服务型" {if condition="$info.mode eq '服务型' "}checked{/if}> 服务型
+					  </label>
+					  <label class="btn btn-default {if condition="$info.mode eq '销售型' "}active{/if}">
+						<input type="radio" name="mode" id="option4" autocomplete="off" value="销售型" {if condition="$info.mode eq '销售型' "}checked{/if}> 销售型
+					  </label>
+					</div>
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">性质</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.structure}" disabled>
+
+					  <div class="input-group-btn input-group-btn-xs" data-toggle="buttons" style="width:10%">
+					  <label class="btn btn-default {if condition="$info.structure eq '企业商家' "}active{/if}">
+						<input type="radio" name="structure" id="option1" autocomplete="off" value="企业商家" {if condition="$info.structure eq '企业商家' "}checked{/if}> 企业商家
+					  </label>
+					  <label class="btn btn-default {if condition="$info.structure eq '个体经营' "}active{/if}">
+						<input type="radio" name="structure" id="option2" autocomplete="off" value="个体经营" {if condition="$info.structure eq '个体经营' "}checked{/if}> 个体经营
+					  </label>
+					  <label class="btn btn-default {if condition="$info.structure eq '社会团体' "}active{/if}">
+						<input type="radio" name="structure" id="option3" autocomplete="off" value="社会团体" {if condition="$info.structure eq '社会团体' "}checked{/if}> 社会团体
+					  </label>
+					  <label class="btn btn-default {if condition="$info.structure eq '事业单位' "}active{/if}">
+						<input type="radio" name="structure" id="option4" autocomplete="off" value="事业单位" {if condition="$info.structure eq '事业单位' "}checked{/if}> 事业单位
+					  </label>
+					  <label class="btn btn-default {if condition="$info.structure eq '职能部门' "}active{/if}">
+						<input type="radio" name="structure" id="option5" autocomplete="off" value="职能部门" {if condition="$info.structure eq '职能部门' "}checked{/if}> 职能部门
+					  </label>
+					</div>
+					</div>
+					</div>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">场地</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" value="{$info.type}" disabled>
+					  <!-- <span class="input-group-addon" > -->
+					 <div class="input-group-btn input-group-btn-xs" data-toggle="buttons" style="width:10%">
+					  <label class="btn btn-default {if condition="$info.type eq '门面' "}active{/if}">
+						<input type="radio" name="type" id="option1" autocomplete="off" value="门面" {if condition="$info.type eq '门面' "}checked{/if}> 门面
+					  </label>
+					  <label class="btn btn-default {if condition="$info.type eq '商铺' "}active{/if}">
+						<input type="radio" name="type" id="option2" autocomplete="off" value="商铺" {if condition="$info.type eq '商铺' "}checked{/if}> 商铺
+					  </label>
+					  <label class="btn btn-default {if condition="$info.type eq '住宅' "}active{/if}">
+						<input type="radio" name="type" id="option3" autocomplete="off" value="住宅" {if condition="$info.type eq '住宅' "}checked{/if}> 住宅
+					  </label>
+					  <label class="btn btn-default {if condition="$info.type eq '园区' "}active{/if}">
+						<input type="radio" name="type" id="option4" autocomplete="off" value="园区" {if condition="$info.type eq '园区' "}checked{/if}> 园区
+					  </label>
+					</div>
+				<!-- </span> -->
+					</div>
+					</div>
+
+					<script type="text/javascript">
+						function winOpen(obj){
+							var parameter = "{$info.keyid}";
+							var string = obj.value;
+							word = string.split(",");
+							var ids = '';
+							for (var i = 0 - 1; i < word.length; i++) {
+								if(typeof word[i] == 'string' && word[i].length > 0){
+									temp = word[i].split('-');
+									ids +=temp[1] + ',';
+								}
+							}
+							if(ids.length > 0){
+								parameter = ids;
+							}
+							var url = "/Seller/index/index/category?keyid=" + parameter;
+							window.open(url, "", "'resizable=1,scrollbars=1,status=no,toolbar=no,location=no,menu=no,width=1800,height=900,left=50,top=50')"); 
+						}
+					</script>
+					<div class="form-group">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon" id="sizing-addon3">行业</span>
+					  <input type="text" class="form-control" placeholder="请把信息补充完整" aria-describedby="basic-addon1" id="industry" name="industry"value="{$info.industry}" onClick="javascript:winOpen(this)" readonly>
+					  {load href='/Seller/public/static/multiple-select.js'/}
+
+					  <div class="input-group-btn" style="position:static;">
+				        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">快捷选项 <span class="caret"></span></button>
+				        <ul class="dropdown-menu dropdown-menu-right">
+				        	<script type="text/javascript"> 
+							<!--
+							function returnValue(){
+								var obj = document.getElementsByName("industry");
+								var put = document.getElementById("industry");
+								var str = '';
+								for (var i = 0; i < obj.length; i++) {
+									if(obj[i].getAttribute("class").indexOf("active") > 0){
+										var checkbox = obj[i].getElementsByTagName("input");
+										str += checkbox[0].value + ',';
+										// str += obj[i].innerText.trim() + ',';
+									}
+								}
+								put.value = str;
+							}
+							--> 
+							</script>
+				          <div class="btn-group" data-toggle="buttons">
+				          	{$string}
+							<input type="button" name="Submit" autocomplete="off" class="btn btn-default" value="提交" onclick="returnValue();">
+						  </div>
+				          
+				        </ul>
+				      </div>
+
+					</div>
+					</div>
+					<div class="col-lg-12 form-group" id = "allmap" style="height: 320px;">
+						
+					</div>
+					<script type="text/javascript">
+					    // 百度地图API功能
+					    //GPS坐标
+					    var x = {$info.coordinate[0]};
+					    var y = {$info.coordinate[1]};
+					    var ggPoint = new BMap.Point(x,y);
+
+					    //地图初始化
+					    var bm = new BMap.Map("allmap");
+					    bm.centerAndZoom(ggPoint, 18);
+					    bm.addControl(new BMap.NavigationControl());
+
+					    //坐标转换完之后的回调函数
+					    translateCallback = function (data){
+					      if(data.status === 0) {
+					        var marker = new BMap.Marker(data.points[0]);
+					        bm.addOverlay(marker);
+					        // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+					        var point = new BMap.Point(116.417854,39.921988);
+					        var label = new BMap.Label("{$info.name}",{offset:new BMap.Size(30,0)});
+					        marker.setLabel(label); //添加百度label
+					        bm.setCenter(data.points[0]);
+					      }
+					    }
+
+					    setTimeout(function(){
+					        var convertor = new BMap.Convertor();
+					        var pointArr = [];
+					        pointArr.push(ggPoint);
+					        convertor.translate(pointArr, 1, 5, translateCallback)
+					    }, 1000);
+					</script>
+
+
+					<div class="btn-group btn-group-justified" role="group" aria-label="...">
+						<div class="btn-group">
+							<a href="show?id={$info.id-1}" class="btn btn-warning" role="button">向前一页</a>
+						</div>
+						<div class="btn-group" role="group">
+							<input class="btn btn-danger" type="submit" value="确定保存"/>
+						</div>
+						<div class="btn-group" role="group">
+							<a href="show?id={$info.id+1}" class="btn btn-success" role="button">往下一页</a>
+						</div>
+						
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--正文 end-->
+{include file="index/footer" /}

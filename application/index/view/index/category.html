@@ -1,0 +1,29 @@
+{include file="index/header" /}
+	<!--正文 start-->
+	<div class="container-fluid" style="padding: 20px;">
+		<script type="text/javascript"> 
+		<!-- 
+		function returnValue(){
+			var obj = document.getElementsByName("industry");
+			var str = '';
+			for (var i = 0; i < obj.length; i++) {
+				if(obj[i].getAttribute("class").indexOf("active") > 0){
+					var checkbox = obj[i].getElementsByTagName("input");
+					str += checkbox[0].value + ',';
+					// str += obj[i].innerText.trim() + ',';
+				}
+			}
+			window.opener.document.all.industry.value = str;
+			window.close();
+		}
+		--> 
+		</script>
+		<div class="row">
+			<div class="btn-group" data-toggle="buttons">
+			{$string}
+			<input type="button" class="btn btn-default"  name="Submit" value="提交" onclick="returnValue();">
+			</div>
+		</div>
+	</div>
+	<!--正文 end-->
+{include file="index/footer" /}
