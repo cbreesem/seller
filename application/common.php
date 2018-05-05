@@ -106,7 +106,7 @@ function showSubsetList($arr){
 	}
 	return $str;
 }
-function getFilesPath($path){
+function getFilesPath($path,$matching=false){
 	// echo $path;
 	$dir = array();
 	$district = opendir($path);
@@ -115,7 +115,8 @@ function getFilesPath($path){
 		if(is_file($path.$row)){
 			$dir[] = $path.$row;
 		}else{
-			// echo $row;
+			echo $row;
+			// if
 			if(is_dir($path.$row) and substr($row,0,1) != '.'){
 				// echo $row;
 				$dir = array_merge($dir, getFilesPath($path.$row.'/'));

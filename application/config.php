@@ -236,4 +236,6 @@ return [
         'var_page'  => 'page',
         'list_rows' => 2,
     ],
+
+    'imgPath' => '/share/CACHEDEV1_DATA/Web/CompanyFiles/商家信息/',
 ];
