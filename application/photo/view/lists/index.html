@@ -1,0 +1,51 @@
+{include file="index/header" /}
+<!--正文 start-->
+<script type="text/javascript">
+	function saveInfo(name){
+		//获取接受返回信息层
+		var f = document.getElementById(name);
+		var data = "name="+ f.name.value +"&oldname="+ f.oldname.value +"&path="+ f.path.value;
+		var url = '/Seller/index/index/upname';
+		ajax = new XMLHttpRequest();
+
+		ajax.open("POST", url, true);
+		//定义传输的文件HTTP头信息
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		//发送POST数据
+		ajax.send(data);
+		ajax.onreadystatechange = function() {
+			//如果执行状态成功，那么就把返回信息写到指定的层里
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				if(ajax.responseText != 'success'){
+					alert('更改失败');
+				}
+			}
+		}
+	}
+</script>
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+				{volist name="list" id="vo"}
+				<div class="col-lg-2 col-xs-4 col-md-3">
+					<a href="/Seller/photo/show?path={$vo.path}&name={$vo.name}" class="thumbnail">
+						<img src="{$vo.path}/{$vo.name}" alt="...">
+					</a>
+					<form class="form-inline" method='post'  action='' id="{$vo.name}">
+					<!-- <form class="form-inline" method='post'  action='/Seller/index/index/upname'> -->
+						<div class="input-group" style="padding-bottom: 25px;">
+							<span class="input-group-addon" id="basic-addon1">名称</span>
+							<input class="form-control" name="name" value="{$vo.name}">
+							<input type="hidden" class="form-control" name="oldname" value="{$vo.name}">
+							<input type="hidden" class="form-control" name="path" value="{$vo.path}">
+							<span class="input-group-btn">
+								<button type="button" id="submit" class="btn btn-info" onClick="saveInfo('{$vo.name}')">确定</button>
+							</span>
+						</div>
+						<!-- <input type="submit" value="更改" onClick="saveInfo()"> -->
+					</form>
+				</div>
+				{/volist} 
+		</div>
+	</div>
+	<!--正文 end-->
+{include file="index/footer" /}

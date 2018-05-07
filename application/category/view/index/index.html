@@ -1,38 +1,29 @@
 {include file="index/header" /}
 	<!--正文 start-->
-	<div class="container-fluid" style="padding:20px;">
-		<div class="row">
-			<form action="/Seller/category/index/add" method="POST" accept-charset="utf-8" class="form-inline">
-
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<form action="/Seller/category/index/add" method="POST" accept-charset="utf-8" class="form-inline">
 			<input type="hidden" name="pid" value="0">
 			<input type="hidden" name="level" value="1">
-			<div class="form-group">
-				<label class="sr-only" for="name">名称</label>
-				<div class="input-group">
-					<div class="input-group-addon">名称</div>
-					<input type="text" name="name" class="form-control" id="name">
-					<div class="input-group-addon"><i class=" icon-comment"></i></div>
-				</div>
-			</div> 
-			<div class="form-group">
-				<label class="sr-only" for="order">排序</label>
-				<div class="input-group">
-					<div class="input-group-addon">排序</div>
-					<input type="text" name="order" class="form-control" id="order" placeholder="请输入分类排序">
-					<div class="input-group-addon"><i class=" icon-comment"></i></div>
-				</div>
-			</div>
-			
-			<button type="submit" class="btn btn-primary">确定添加</button>
-
-			</form>
-		</div>
+			<div class="input-group">
+				{load href='/Seller/public/static/category.js'/}
+				<span class="input-group-addon">父级</span>
+				<span id="category">
+					<select onChange="getPid(this)" class="form-control" id="id" style="border-radius:0;"></select>
+					<select onChange="getPid(this)" class="form-control"></select>
+					<select onChange="getPid(this)" class="form-control"></select>
+					<select onChange="getPid(this)" class="form-control"></select>
+				</span>
+				<input type="hidden" id='pid' name="pid">
+				<span class="input-group-addon">名称</span>
+				<input type="text" name="name" class="form-control" id="name" placeholder="请输入名称">
+				<span class="input-group-addon">排序</span>
+				<input type="text" name="order" class="form-control" id="order" placeholder="请输入排序">
+				<span class="input-group-btn">
+					<button type="button" id="submit" class="btn btn-primary">确定</button>
+				</span>
+			</div>		
+		</form>
+		{$string}
 	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<h3>{$string}</h3>
-		</div>
-	</div>
-
 	<!--正文 end-->
 {include file="index/footer" /}

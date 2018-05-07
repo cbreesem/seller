@@ -106,22 +106,47 @@ function showSubsetList($arr){
 	}
 	return $str;
 }
-function getFilesPath($path,$matching=false){
-	// echo $path;
+function getFilesPath($path, $matching=false, $filter=NULL){
 	$dir = array();
 	$district = opendir($path);
 	while ( $row = readdir($district)) {
-		// echo $row;
 		if(is_file($path.$row)){
-			$dir[] = $path.$row;
-		}else{
-			echo $row;
-			// if
-			if(is_dir($path.$row) and substr($row,0,1) != '.'){
-				// echo $row;
-				$dir = array_merge($dir, getFilesPath($path.$row.'/'));
+			if ($filter == NULL) {
+				$dir[] = $path.$row;
+			}else{
+				if(strpos($filter,',') === false){
+					if(strpos($row,$filter) === false) $dir[] = $path.$row;
+				}else{
+					$arr = explode(',',$filter);
+					$ext = explode('.', $row);
+					if(!in_array($ext[count($ext)-1], $arr)) $dir[] = $path.$row;
+				}
 			}
+		}else{
+			if($row == '已匹配' && $matching == true) continue;
+			if(is_dir($path.$row) and substr($row,0,1) != '.') $dir = array_merge($dir, getFilesPath($path.$row.'/',$matching,$filter));
 		}
 	}
 	return $dir;
+}
+
+function getCoordinate($path){
+	if(!is_file($path)) return false;
+	$fileinfo = exif_read_data ($path);
+	if(array_key_exists('GPSLatitude',$fileinfo) && array_key_exists('GPSLongitude',$fileinfo)){
+		$hour = explode('/', $fileinfo['GPSLatitude'][0]);
+		$minute = explode('/', $fileinfo['GPSLatitude'][1]);
+		$second = explode('/', $fileinfo['GPSLatitude'][2]);
+		$GPSLatitude = $hour[0]/$hour[1] + $minute[0]/$minute[1]/60 + $second[0]/$second[1]/3600;
+
+		$hour = explode('/', $fileinfo['GPSLongitude'][0]);
+		$minute = explode('/', $fileinfo['GPSLongitude'][1]);
+		$second = explode('/', $fileinfo['GPSLongitude'][2]);
+		$GPSLongitude = $hour[0]/$hour[1] + $minute[0]/$minute[1]/60 + $second[0]/$second[1]/3600;
+
+		$data = $GPSLongitude.','.$GPSLatitude;
+		return $data;
+	}else{
+		return false;
+	}
 }

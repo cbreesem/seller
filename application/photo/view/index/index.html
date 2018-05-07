@@ -1,0 +1,30 @@
+{include file="index/header" /}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        {volist name="list" id="vo"}
+        <div class="col-sm-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><b>{$vo.district}</b> <span class="badge badge-primary">{$vo.num}</span></div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>区县</th>
+                            <th><span class="pull-right">剩余数量</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volist name="vo.list" id="v"}
+                        <tr>
+                            <td><a href="/Seller/photo/lists?district={$vo.district}&city={$v['city']}">{$v['city']}</a></td>
+                            <td><span class="pull-right">{$v.count}</span></td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+                <div class="panel-footer">此地区共有{$vo.count}张照片未匹配商家</div>
+            </div>
+        </div>
+        {/volist}
+    </div>
+</div>
+{include file="index/footer" /}

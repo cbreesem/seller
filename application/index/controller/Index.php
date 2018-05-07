@@ -419,9 +419,7 @@ class Index extends Controller {
 				'city' => $data['city']));
 	}
 	public function getGPS($path){
-		// echo $path;
-		// echo '<br>';
-		// echo !file_exists($path);
+
 		$fileinfo = exif_read_data ($path);
 		if(array_key_exists('GPSLatitude',$fileinfo) && array_key_exists('GPSLongitude',$fileinfo)){
 			$hour = explode('/', $fileinfo['GPSLatitude'][0]);
