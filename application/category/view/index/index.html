@@ -1,5 +1,7 @@
 {include file="index/header" /}
 	<!--正文 start-->
+	{load href='/Seller/public/static/jstree-3.3.5/themes/default/style.min.css'/}
+	{load href='/Seller/public/static/jstree-3.3.5/jstree.min.js'/}
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<form action="/Seller/category/index/add" method="POST" accept-charset="utf-8" class="form-inline">
 			<input type="hidden" name="pid" value="0">
@@ -23,6 +25,14 @@
 				</span>
 			</div>		
 		</form>
+		<!-- <div id="tree">
+
+		</div> -->
+		<script type="text/javascript"> 
+			// $('#tree').jstree({ 'core' : {
+			// 	'data' : 
+			// } });
+		</script>
 		{$string}
 	</div>
 	<!--正文 end-->

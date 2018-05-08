@@ -6,9 +6,19 @@ use think\Db;
 
 class Index extends Controller {
 	public function index() {
-		$db = DB::name('category');
+		// $arr = DB::name('category')->field(['id','name','pid'])->select();
+		// foreach ($arr as $key => $val) {
 
-		$where['pid'] = 0;
+		// 	$arr[$key]['id'] = $val['id'];
+		// 	$arr[$key]['parent'] = $val['pid'] == 0 ? '#' : $val['pid'];
+		// 	$arr[$key]['text'] = $val['name'];
+
+		// 	unset($arr[$key]['name']);
+		// 	unset($arr[$key]['pid']);
+		// }
+		// $arr = json_encode($arr);
+		// $this->assign('arr', $arr);
+
 		$list = getSubset();
 		$string = showSubsetList($list);
 		$this->assign('string', $string);
