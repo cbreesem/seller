@@ -22,9 +22,20 @@ class Lists extends Controller {
                 );
 			}
         }
-        $page = !empty($_GET['page']) ? intval($_GET['page'])*48 : 0;
-		$list = array_slice($list,$page,48);
+        $page = !empty($get['page']) ? intval($get['page'])*48 : 0;
+		$list = !empty($list) ? array_slice($list,$page,48) : array();
         $this->assign('list', $list);
         return $this->fetch();
+    }
+    public function edit() {
+        if(request()->isPost()){
+            $post = input('post.');
+			$path = '/share/CACHEDEV1_DATA/Web/'.$post['path'].'/'.$post['oldname'];
+			$newpath = '/share/CACHEDEV1_DATA/Web/'.$post['path'].'/'.$post['name'];
+			if($post['name'] != $post['oldname'] && is_file($path)){
+				rename($path,$newpath);
+				echo 'success';
+			}
+		}
     }
 }

@@ -5,7 +5,7 @@
 		//获取接受返回信息层
 		var f = document.getElementById(name);
 		var data = "name="+ f.name.value +"&oldname="+ f.oldname.value +"&path="+ f.path.value;
-		var url = '/Seller/index/index/upname';
+		var url = '/Seller/photo/list/edit';
 		ajax = new XMLHttpRequest();
 
 		ajax.open("POST", url, true);
@@ -18,6 +18,8 @@
 			if (ajax.readyState == 4 && ajax.status == 200) {
 				if(ajax.responseText != 'success'){
 					alert('更改失败');
+				}else{
+					alert('更改成功')；
 				}
 			}
 		}

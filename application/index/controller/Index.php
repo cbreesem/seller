@@ -297,7 +297,6 @@ class Index extends Controller {
 	public function imgShow(){
 		if(!empty($_GET['path']) && !empty($_GET['name'])){
 			$pathlist = explode('/', $_GET['path']);
-			// print_r($pathlist);
 			$info['province'] = '湖南省';
 			$info['district'] = mb_substr($pathlist[3],0,-2).'市';
 			$info['city'] = $pathlist[4] != $info['district'] ? $pathlist[4] : $pathlist[5];
